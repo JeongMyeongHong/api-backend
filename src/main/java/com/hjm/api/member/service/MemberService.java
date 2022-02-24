@@ -20,4 +20,9 @@ public interface MemberService {
     String showMileage();
     String saveMileage();
     String deleteMileage();
+
+
+    String calc();
+    String bmi();
+    String grade();
 }
