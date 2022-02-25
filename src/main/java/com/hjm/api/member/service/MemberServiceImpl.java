@@ -1,5 +1,9 @@
 package com.hjm.api.member.service;
 
+import com.hjm.api.member.domain.CalcDTO;
+import com.hjm.api.member.domain.MemberDTO;
+import com.hjm.api.member.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,59 +19,69 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class MemberServiceImpl implements MemberService{
+@RequiredArgsConstructor
+public class MemberServiceImpl implements MemberService {
+    private final MemberRepository repository;
+
     @Override
-    public String showMemberList() {
-        return null;
+    public String calc(CalcDTO calc) {
+        int num1 = calc.getNum1();
+        int num2 = calc.getNum2();
+        String opcode = calc.getOpcode();
+        int res = 0;
+        switch (opcode) {
+            case "+":
+                res = num1 + num2;
+                break;
+            case "-":
+                res = num1 - num2;
+                break;
+            case "*":
+                res = num1 * num2;
+                break;
+            case "/":
+                res = num1 / num2;
+                break;
+            case "%":
+                res = num1 % num2;
+                break;
+        }
+        return String.format("%d %s %d = %d", num1, opcode, num2, res);
     }
 
     @Override
-    public String showMemberInfo() {
-        return null;
+    public String bmi(MemberDTO member) {
+        String name = member.getName();
+        double bmi = member.getWeight() * 10000 / (member.getHeight() * member.getHeight());
+        String res = "";
+        if (bmi >= 25) {
+            res = "비만";
+        } else if (bmi >= 23) {
+            res = "과체중";
+        } else if (bmi >= 18.5) {
+            res = "정상";
+        } else {
+            res = "저체중";
+        }
+        return String.format("[%s] 님은 [%s] 입니다.", name, res);
     }
 
     @Override
-    public String showShipmentList() {
-        return null;
+    public String grade(MemberDTO member) {
+        return (member.getMath() + member.getKr() + member.getEn() >= 180)
+                ? member.getName() + "님은 합격입니다"
+                : member.getName() + "님은 불합격입니다";
     }
 
     @Override
-    public String registerSendMail() {
-        return null;
+    public String login(MemberDTO member) {
+        return member.getPw().equals("0000")
+                ? member.getUserId() + "님 로그인 성공"
+                : member.getUserId() + "님 로그인 실패";
     }
 
     @Override
-    public String showMileageList() {
-        return null;
-    }
-
-    @Override
-    public String showMileage() {
-        return null;
-    }
-
-    @Override
-    public String saveMileage() {
-        return null;
-    }
-
-    @Override
-    public String deleteMileage() {
-        return null;
-    }
-
-    @Override
-    public String calc() {
-        return null;
-    }
-
-    @Override
-    public String bmi() {
-        return null;
-    }
-
-    @Override
-    public String grade() {
+    public String sort(CalcDTO calc) {
         return null;
     }
 }

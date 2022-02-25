@@ -17,11 +17,15 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 public class MemberDTO {
-    private String uesrId;
+    private String userId;
     private String name;
     private String address;
     private String phone;
-    private int height;
-    private int weight;
+    private double height;
+    private double weight;
     private String debutDate;
+    private int math;
+    private int kr;
+    private int en;
+    private String pw;
 }

@@ -1,5 +1,10 @@
 package com.hjm.api.member.service;
 
+import com.hjm.api.member.domain.CalcDTO;
+import com.hjm.api.member.domain.MemberDTO;
+import com.hjm.api.member.repository.MemberRepository;
+import org.springframework.web.bind.annotation.RequestBody;
+
 /**
  * packageName   :   com.hjm.api.member.service
  * fileName      :   MemberService
@@ -12,17 +17,14 @@ package com.hjm.api.member.service;
  * 2022-02-11      JeongmyoengHong     최초 생성
  */
 public interface MemberService {
-    String showMemberList();
-    String showMemberInfo();
-    String showShipmentList();
-    String registerSendMail();
-    String showMileageList();
-    String showMileage();
-    String saveMileage();
-    String deleteMileage();
 
+    String calc(CalcDTO calc);
 
-    String calc();
-    String bmi();
-    String grade();
+    String bmi(MemberDTO member);
+
+    String grade(MemberDTO member);
+
+    String login(MemberDTO member);
+
+    String sort(CalcDTO calc);
 }
